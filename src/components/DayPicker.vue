@@ -1,0 +1,1 @@
+<template>Пн Вт Ср Чт</template>
