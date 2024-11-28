@@ -33,5 +33,7 @@ import NavigationDrawer from '@/components/NavigationDrawer.vue';
 .view {
     flex: 1;
     margin: 30px;
+    display: flex;
+    justify-content: stretch;
 }
 </style>

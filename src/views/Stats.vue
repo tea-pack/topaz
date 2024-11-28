@@ -5,7 +5,7 @@
             <sorted-bar-chart :data="mockData"></sorted-bar-chart>
         </div>
         <div class="filter">
-            <!-- <range-picker></range-picker> -->
+            <range-picker></range-picker>
         </div>
     </div>
 </template>
@@ -39,17 +39,12 @@ const mockData: ProgramRecord[] = [
 <style>
 .stats {
     display: flex;
-    /* gap: 10px; */
-    /* padding: 20px; */
-    /* margin-left: 20px; */
-}
-
-.filter {
-    flex: 1
+    justify-content: space-between;
+    flex: 1;
 }
 
 .data {
-    flex: 3;
+
     display: flex;
     flex-direction: column;
     align-items: center;
