@@ -23,7 +23,6 @@ import NavigationDrawer from '@/components/NavigationDrawer.vue';
     display: flex;
     justify-content: center;
     align-items: stretch;
-    gap: 10px
 }
 
 .nav {
@@ -33,6 +32,6 @@ import NavigationDrawer from '@/components/NavigationDrawer.vue';
 
 .view {
     flex: 1;
-    margin: 10px;
+    margin: 30px;
 }
 </style>
