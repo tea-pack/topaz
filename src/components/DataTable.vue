@@ -120,19 +120,18 @@ td {
     align-items: center;
     align-self: stretch;
     margin: 0 30px;
+    position: relative;
 }
 
 .controls {
     flex: 1;
     display: flex;
     justify-content: center;
-    /* margin-right: -100px; */
-    position: relative;
 }
 
 .showing {
     position: absolute;
-    right: 220px;
+    right: 20px;
 }
 
 input {
