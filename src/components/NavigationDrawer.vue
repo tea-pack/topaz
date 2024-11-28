@@ -1,6 +1,6 @@
 <script setup lang = "ts">
 const topRoutes = [
-    {icon: "groups", name: "Cтатистика", route: "/stats"},
+    {icon: "groups", name: "Cтатистика", route: "/"},
     {icon: "search", name: "Анализ закономерностей", route: "/patterns"},
     {icon: "favorite", name: "Рекомендации", route: "/recommend"},
 ]

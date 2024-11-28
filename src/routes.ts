@@ -9,7 +9,7 @@ import About from "@/views/About.vue";
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
-        { path: "/stats", component: Stats},
+        { path: "/", component: Stats},
         { path: "/patterns", component: Patterns},
         { path: "/recommend", component: Recommend},
         { path: "/settings", component: Settings},
