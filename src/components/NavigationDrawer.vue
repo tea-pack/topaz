@@ -52,7 +52,6 @@ nav {
     display: flex;
     flex-direction: column;
     background-color: var(--md-sys-color-surface-container-low);
-    border-radius: 16px;
     height: 100%; 
     z-index: 8
 }
