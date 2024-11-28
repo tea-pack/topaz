@@ -1,18 +1,22 @@
 <template>
     <div class="data-table">
         <table>
-            <tr>
-                <th>Канал</th>
-                <th>Программа</th>
-                <th>Уникальных клиентов</th>
-                <th>Среднее время просмотра</th>
-            </tr>
-            <tr v-for="row in props.data.slice(from, to)">
-                <td>{{ row.channel }}</td>
-                <td>{{ row.program }}</td>
-                <td>{{ row.uniqueClients }}</td>
-                <td>{{ row.watchTime }}</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Канал</th>
+                    <th>Программа</th>
+                    <th>Уникальных клиентов</th>
+                    <th>Среднее время просмотра</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="row in props.data.slice(from, to)">
+                    <td>{{ row.channel }}</td>
+                    <td>{{ row.program }}</td>
+                    <td>{{ row.uniqueClients }}</td>
+                    <td>{{ row.watchTime }}</td>
+                </tr>
+            </tbody>
         </table>
         <div class="table-footer">
             <div class="controls">
