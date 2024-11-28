@@ -6,7 +6,7 @@ const topRoutes = [
 ]
 const bottomRoutes = [
     {icon: "settings", name: "Настройки", route: "/settings"},
-    {icon: "account_circle", name: "Помошь", route: "/help"},
+    {icon: "account_circle", name: "Помощь", route: "/help"},
     {icon: "help", name: "О приложении", route: "/about"},
 ]
 </script>
