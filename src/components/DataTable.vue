@@ -17,7 +17,14 @@
         <div class="table-footer">
             <div class="controls">
                 <button @click="last">&larr;</button>
-                <input type="text" inputmode="numeric" autocomplete="off" placeholder="Введите номер ряда">
+                <input 
+                    type="text" 
+                    inputmode="numeric" 
+                    autocomplete="off" 
+                    placeholder="Введите номер ряда"
+                    @keypress.enter="find"
+                    ref="recnum"
+                >
                 <button @click="next">&rarr;</button>
             </div>
             <div class="showing">Ряды {{ from + 1 }}-{{ to }} из {{ props.data.length }}</div>
@@ -26,13 +33,31 @@
 </template>
 
 <script setup lang = "ts">
-import { ref } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 
 export interface ProgramRecord {
     channel: string;
     program: string;
     uniqueClients: number;
     watchTime: number;
+}
+
+
+const barChart = useTemplateRef('recnum')!
+
+function find() {
+    let str = barChart.value?.value
+    if (str != undefined) {
+        let n = parseInt(str) - 1
+        if (n > props.data.length) {
+            return
+        }
+        from.value = n - n % 5
+        to.value = Math.min(from.value + 5, props.data.length)
+        if (barChart.value != null) {
+            barChart.value.value = ""
+        }
+    }
 }
 
 const props = defineProps<{
@@ -55,6 +80,8 @@ function last() {
         to.value = Math.min(from.value + 5, props.data.length)
     } 
 }
+
+
 
 </script>
 
