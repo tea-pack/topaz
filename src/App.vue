@@ -23,6 +23,7 @@ import NavigationDrawer from '@/components/NavigationDrawer.vue';
     display: flex;
     justify-content: center;
     align-items: stretch;
+    background: var(--md-sys-color-surface);
 }
 
 .nav {
