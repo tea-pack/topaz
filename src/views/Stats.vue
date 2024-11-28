@@ -36,7 +36,7 @@ const mockData: ProgramRecord[] = [
 
 </script>
 
-<style>
+<style scoped>
 .stats {
     display: flex;
     justify-content: space-between;

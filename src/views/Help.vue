@@ -2,7 +2,7 @@
     <p>Возникли вопросы? Пишите по адресу <a href="mailto:webmaster@example.com">mailtest@test.com</a></p>
 </template>
 
-<style>
+<style scoped>
 p {
     margin: 10px;
     font-size: 24px;

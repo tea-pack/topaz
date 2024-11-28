@@ -89,7 +89,7 @@ function last() {
 
 </script>
 
-<style>
+<style scoped>
 .data-table {
     background: var(--md-sys-color-background);
     font-family: "Roboto", sans-serif !important;
