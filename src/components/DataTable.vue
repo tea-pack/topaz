@@ -91,7 +91,7 @@ function last() {
 
 <style>
 .data-table {
-    background: var(--md-sys-color-surface);
+    background: var(--md-sys-color-background);
     font-family: "Roboto", sans-serif !important;
     border-radius: 12px;
     display: flex;
@@ -108,6 +108,7 @@ th, td {
     height: 57px;
     line-height: 41px !important;
     text-align: left;
+    color: var(--md-sys-color-on-surface);
 }
 
 td {
@@ -121,6 +122,7 @@ td {
     align-self: stretch;
     margin: 0 30px;
     position: relative;
+    color: var(--md-sys-color-on-surface);
 }
 
 .controls {
@@ -140,6 +142,7 @@ input {
     border-radius: 4px;
     border: 1px solid var(--md-sys-color-outline-variant);
     padding: 10px;
+    color: var(--md-sys-color-on-surface-variant);
 }
 
 button {
@@ -147,5 +150,6 @@ button {
     border: none;
     cursor: pointer;
     font-size: 14px;
+    color: var(--md-sys-color-on-surface-variant);
 }
 </style>
