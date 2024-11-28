@@ -21,7 +21,7 @@
                     type="text" 
                     inputmode="numeric" 
                     autocomplete="off" 
-                    placeholder="Введите номер ряда"
+                    placeholder="Введите номер ряда..."
                     @keypress.enter="find"
                     ref="recnum"
                 >
