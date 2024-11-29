@@ -37,7 +37,7 @@ async function fetchData() {
 
         // Convert the edges array
         edges = data.edges
-            .filter((edge: any) => edge.weight > 300)
+            .filter((edge: any) => edge.weight > 200)
             .map((edge: any) => ({
                 from: edge.from,
                 to: edge.to,
@@ -64,13 +64,14 @@ function makeGraph() {
             enabled: true,
             barnesHut: {
               theta: 1,
-              gravitationalConstant: -2000,
+              gravitationalConstant: -3000,
               centralGravity: 0.05,
-              springLength: 100,
+              springLength: 300,
               springConstant: 0.05,
             },
-            maxVelocity: 5,
-            stabilization: { iterations: 100 },
+            maxVelocity: 10,
+            minVelocity: 0.5,
+            stabilization: { iterations: 1 },
           },
           interaction: {
               dragNodes: false,
