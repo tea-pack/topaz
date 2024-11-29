@@ -92,7 +92,7 @@ function last() {
 
 <style scoped>
 .data-table {
-    background: var(--md-sys-color-background);
+    background: var(--md-sys-color-surface);
     font-family: "Roboto", sans-serif !important;
     border-radius: 12px;
     display: flex;
