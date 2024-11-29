@@ -68,7 +68,7 @@ function initChart() {
 
       // Make the chart responsive
       window.addEventListener('resize', ()=>{chart.resize()});
-      chart.resize({width: 1000, height: 300});
+      chart.resize({width: 500, height: 300});
 }
 </script>
 
