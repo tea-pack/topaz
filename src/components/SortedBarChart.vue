@@ -1,5 +1,5 @@
 <template>
-    <div ref="chart" style="width: 100%; height: 500px; margin-top: 30px"></div>
+    <div ref="chart" style="width: 100%; height: 500px; margin-top: 30px" class="chart"></div>
 </template>
   
 <script setup lang = "ts">
@@ -68,12 +68,16 @@ function initChart() {
 
       // Make the chart responsive
       window.addEventListener('resize', ()=>{chart.resize()});
-      chart.resize({width: 500, height: 300});
+      chart.resize();
 }
 </script>
 
 <style scoped>
 .chart {
   margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 </style>
