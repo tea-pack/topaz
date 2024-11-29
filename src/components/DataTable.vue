@@ -1,5 +1,20 @@
 <template>
     <div class="data-table">
+        <div class="table-footer">
+            <div class="controls">
+                <button @click="last">&larr;</button>
+                <input 
+                    type="text" 
+                    inputmode="numeric" 
+                    autocomplete="off" 
+                    placeholder="Введите номер ряда..."
+                    @keypress.enter="find"
+                    ref="recnum"
+                >
+                <button @click="next">&rarr;</button>
+            </div>
+            <div class="showing">Ряды {{ from + 1 }}-{{ to }} из {{ props.data.length }}</div>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -18,21 +33,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="table-footer">
-            <div class="controls">
-                <button @click="last">&larr;</button>
-                <input 
-                    type="text" 
-                    inputmode="numeric" 
-                    autocomplete="off" 
-                    placeholder="Введите номер ряда..."
-                    @keypress.enter="find"
-                    ref="recnum"
-                >
-                <button @click="next">&rarr;</button>
-            </div>
-            <div class="showing">Ряды {{ from + 1 }}-{{ to }} из {{ props.data.length }}</div>
-        </div>
+
     </div>
 </template>
 
