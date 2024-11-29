@@ -18,7 +18,7 @@ var edges: Edge[]
 async function fetchData() {
     try {
         // Fetch the JSON file
-        const response = await fetch('../../data/200.json');
+        const response = await fetch('../../data/100.json');
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -36,11 +36,13 @@ async function fetchData() {
         }));
 
         // Convert the edges array
-        edges = data.edges.map((edge: any) => ({
-            from: edge.from,
-            to: edge.to,
-            hidden: true
-        }));
+        edges = data.edges
+            .filter((edge: any) => edge.weight > 300)
+            .map((edge: any) => ({
+                from: edge.from,
+                to: edge.to,
+                hidden: false
+            }));
 
         makeGraph()
         // Log the results (or use them in your application)
@@ -60,15 +62,14 @@ function makeGraph() {
         const options: Options = {
           physics: {
             enabled: true,
-            solver: "barnesHut",
-            forcebarnesHut: {
-              theta: 100000,
-              gravitationalConstant: -100000,
+            barnesHut: {
+              theta: 1,
+              gravitationalConstant: -2000,
               centralGravity: 0.05,
-              springLength: 500,
-              springConstant: 0.1,
+              springLength: 100,
+              springConstant: 0.05,
             },
-            maxVelocity: 10,
+            maxVelocity: 5,
             stabilization: { iterations: 100 },
           },
           interaction: {
