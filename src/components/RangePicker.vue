@@ -21,7 +21,8 @@
     </div>
 
     <div class="date" v-if="active==1">
-        <date-picker></date-picker>
+        <date-picker :label="`Начало`"></date-picker>
+        <date-picker :label="`Конец`"></date-picker>
     </div>
 
     <div class="day" v-if="active==2">
@@ -34,8 +35,8 @@
     </div>
 
     <div class="buttons">
-        <button class="clear">Применить</button>
-        <button class="accept">Очистить</button>
+        <button class="clear">Очистить</button>
+        <button class="accept">Применить</button>
     </div>
 </div>    
 </template>
@@ -76,11 +77,11 @@ p {
     background: var(--md-sys-color-background);
     border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: 12px;
+    width: 400px;
 }
 
 button {
-    padding: 14px 0;
-    margin: 0 34px;
+    padding: 14px 34px;
     font-weight: 500;
     font-size: 14px;
     background: none;
@@ -95,6 +96,10 @@ button {
 
 .selector {
     margin-bottom: 18px;
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .time {
@@ -126,5 +131,19 @@ button {
 .accept {
     background: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
+}
+
+.day {
+    padding: 0 20px;
+    width: 358px;
+
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    width: 303.12px;
+    gap: 20px;
+    margin: 0 43px;
 }
 </style>
