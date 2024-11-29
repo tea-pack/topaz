@@ -34,23 +34,23 @@ const mockData: ProgramRecord[] = [
 
 
 
-async function fetchUsers(url: string): Promise<ProgramRecord[]> {
-  try {
-    const response = await fetch(url);
+// async function fetchUsers(url: string): Promise<ProgramRecord[]> {
+//   try {
+//     const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
 
-    const data: ProgramRecord[] = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching items:", error);
-    throw error;
-  }
-}
+//     const data: ProgramRecord[] = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching items:", error);
+//     throw error;
+//   }
+// }
 
-const url = "http://localhost:8081/get-users";
+// const url = "http://localhost:8081/get-users";
 // fetchUsers(url)
 //     .then((items) => {
 //         console.log("Fetched items:", items);
