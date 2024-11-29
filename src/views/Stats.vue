@@ -4,44 +4,14 @@
             <data-table :data="mockData"></data-table>
             <sorted-bar-chart :data="mockData"></sorted-bar-chart>
         </div>
-        <div class="show-controls">
-          <div class="filters">
-            <span class="icon">
-              <span class="material-symbols-outlined">
-                filter_alt
-              </span>
-            </span>
-            <span class="label">Фильтры</span>
-          </div>
-          <div class="sorts">
-            <span class="icon">
-              <span class="material-symbols-outlined">
-                sort
-              </span>
-            </span>
-            <span class="label">Столбцы и<br>сортировки</span>
-          </div>
-        </div>
-        <div 
-          class="show-filter"
-          @click="showingFilter = !showingFilter" 
-        >
-          {{ showingFilter ? "X" : "&larr;" }}
-        </div>
-        <div 
-          class="filter" 
-          :class="{'showing-filter': showingFilter}"
-        >
-            <range-picker></range-picker>
-        </div>
+        <controls-sidebar></controls-sidebar>
     </div>
 </template>
 
 <script setup lang = "ts">
-import RangePicker from '@/components/RangePicker.vue';
+import ControlsSidebar from '@/components/ControlsSidebar.vue';
 import DataTable, { ProgramRecord } from '@/components/DataTable.vue';
 import SortedBarChart from "@/components/SortedBarChart.vue";
-import { ref } from "vue"
 
 const mockData: ProgramRecord[] = [
   { channel: "Первый канал", program: "Программа 1", uniqueClients: 120, watchTime: 423 },
@@ -62,7 +32,7 @@ const mockData: ProgramRecord[] = [
   { channel: "ТВ+7", program: "Детектив", uniqueClients: 125, watchTime: 300 },
 ];
 
-const showingFilter = ref(false);
+
 
 async function fetchUsers(url: string): Promise<ProgramRecord[]> {
   try {
@@ -102,68 +72,7 @@ const url = "http://localhost:8081/get-users";
     display: flex;
     flex-direction: column;
     align-items: center;
-
     flex: 1;
-}
-
-.show-controls {
-  position: absolute;
-  top: 30px;
-  right: 10px;
-  border: 1px solid var(--md-sys-color-outline);
-  background: var(--md-sys-color-surface);
-  font-weight: 700;
-  cursor: pointer;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  user-select: none;
-  font-family: "Roboto", sans-serif;
-  z-index: 10;
-}
-
-.sorts, .filters {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-}
-
-.sorts:hover .icon, .filters:hover .icon {
-  background: var(--md-sys-color-secondary-container);
-}
-
-.icon {
-  width: 64px;
-  height: 32px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-}
-
-.label {
-  font-weight: 500;
-  font-size: 12px;
-  padding: 5px;
-}
-
-.show-controls span {
-  text-align: center;
-}
-
-.filter {
-  position: absolute;
-  right: -500px;
-  transition: right .2s;
-}
-
-.showing-filter {
-  right: 10px;
 }
 
 .material-symbols-outlined {
