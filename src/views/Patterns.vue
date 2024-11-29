@@ -13,5 +13,6 @@ import Graph from '@/components/Graph.vue';
     display: flex;
     align-items: stretch;
     justify-content: stretch;
+    flex: 1;
 }
 </style>
