@@ -51,13 +51,13 @@ async function fetchUsers(url: string): Promise<ProgramRecord[]> {
 }
 
 const url = "http://localhost:8081/get-users";
-fetchUsers(url)
-    .then((items) => {
-        console.log("Fetched items:", items);
-    })
-    .catch((error) => {
-        console.error("Failed to fetch items:", error);
-    });
+// fetchUsers(url)
+//     .then((items) => {
+//         console.log("Fetched items:", items);
+//     })
+//     .catch((error) => {
+//         console.error("Failed to fetch items:", error);
+//     });
 
 </script>
 
