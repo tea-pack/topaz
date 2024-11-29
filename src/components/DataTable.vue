@@ -85,9 +85,6 @@ function last() {
         to.value = Math.min(from.value + 5, props.data.length)
     } 
 }
-
-
-
 </script>
 
 <style scoped>
