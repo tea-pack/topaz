@@ -44,11 +44,12 @@
 
     <div class="buttons">
         <button class="clear" @click="clear()">Очистить</button>
-        <button class="accept" >Применить</button>
+        <button class="accept" @click="update()">Применить</button>
     </div>
 
-    <button class="save" @click="save()">Сохранить фильтр</button>
-</div>    
+</div>
+<button class="save" @click="save()">Сохранить фильтр</button>
+
 </template>
 
 <script setup lang = "ts">
@@ -120,6 +121,26 @@ function save() {
 
     document.cookie = `${encodeURIComponent(Date.now())}=${encodeURIComponent(data)}; path=/`;
 }
+
+function update() {
+    let data = `
+        {
+            "start_date": "${dateRange.start}",
+            "end_date": "${dateRange.end}",
+            "is_monday": ${days.value[0].toggled},
+            "is_tuesday": ${days.value[1].toggled},
+            "is_wednesday": ${days.value[2].toggled},
+            "is_thursday": ${days.value[3].toggled},
+            "is_friday": ${days.value[4].toggled},
+            "is_saturday": ${days.value[5].toggled},
+            "is_sunday": ${days.value[6].toggled},
+            "start_time": "${timeRange.start}",
+            "end_time": "${timeRange.end}"
+        }
+    `
+
+    console.log(data)
+}
 </script>
 
 <style scoped>
@@ -146,7 +167,7 @@ p {
     border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: 12px;
     width: 400px;
-    margin: 20px;
+    margin: 20px 20px 5px 20px;
 }
 
 button {
@@ -225,7 +246,7 @@ button {
 .save {
     background: var(--md-sys-color-primary);
     color: var(--md-sys-color-on-primary);
-    margin: 0 103px;
+    margin: 0 125px;
     border-radius: 8px;
 }
 </style>
