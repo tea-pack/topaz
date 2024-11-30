@@ -5,9 +5,9 @@
     </span>
 
     <div class="clock">
-        <input type="text">
+        <input type="text" v-model="internalHours">
         <span class="column">:</span>
-        <input type="text">
+        <input type="text" v-model="internalMinutes">
     </div>
 
     <div class="clock-label">
@@ -18,9 +18,57 @@
 </template>
 
 <script setup lang = "ts">
+import { ref, watch } from "vue"
+
+const time = defineModel<number>({required: true})
+
 const props = defineProps<{
     label: string
 }>()
+
+let initialMinutes = (time.value % 60).toString()
+let initialHours = Math.floor(time.value / 60).toString()
+
+const internalMinutes = ref(initialMinutes == "0" ? "" : initialMinutes)!
+const internalHours = ref(initialHours == "0" ? "" : initialHours)
+
+watch(internalHours, updateTime)
+watch(internalMinutes, updateTime)
+
+const clearTime = () => {
+    internalHours.value = "";
+    internalMinutes.value = "";
+};
+
+defineExpose({ clearTime });
+
+function updateTime() {
+    let minutes = "";
+    if (internalMinutes.value != undefined) {
+        minutes = internalMinutes.value
+    } else {
+        minutes = "0"
+    }
+
+    let hours = "";
+    if (internalHours.value != undefined) {
+        hours = internalHours.value
+    } else {
+        hours = "0"
+    }
+
+    let minutesInt = parseInt(minutes)
+    let hoursInt = parseInt(hours)
+    if (isNaN(minutesInt)) {
+        minutesInt = 0
+    }
+    if (isNaN(hoursInt)) {
+        hoursInt = 0
+    }
+
+    time.value = minutesInt + hoursInt * 60
+}
+
 </script>
 
 <style scoped>

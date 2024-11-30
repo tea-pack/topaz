@@ -1,6 +1,6 @@
 <template>
     <div class="picker">
-        <input type="text">
+        <input type="text" v-model="internalDate">
         <div class="label">
             {{ props.label }}
         </div>
@@ -8,9 +8,24 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from "vue"
 const props = defineProps<{
     label: string
 }>()
+
+const date = defineModel<string>({required: true})
+
+let initialDate = date.value;
+const internalDate = ref(initialDate)
+watch(internalDate, () => {
+    date.value = internalDate.value
+})
+
+const clearDate = () => {
+    internalDate.value = "";
+};
+
+defineExpose({ clearDate });
 </script>
 
 <style scoped>

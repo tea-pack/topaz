@@ -21,36 +21,100 @@
     </div>
 
     <div class="date" v-if="active==1">
-        <date-picker :label="`Начало`"></date-picker>
-        <date-picker :label="`Конец`"></date-picker>
+        <date-picker :label="`Начало`" v-model="dateRange.start" ref="dateStart"></date-picker>
+        <date-picker :label="`Конец`" v-model="dateRange.end" ref="dateEnd"></date-picker>
     </div>
 
     <div class="day" v-if="active==2">
-        <day-picker></day-picker>
+        <div class="days">
+        <day-button
+            v-for="(day, index) in days"
+            :label="day.label"
+            :toggled="day.toggled"
+            :key="day.label"
+            @click="toggleDay(index)"
+        ></day-button>
+    </div>
     </div>
 
     <div class="time" v-if="active==3">
-        <time-picker :label="`Начало`"></time-picker>
-        <time-picker :label="`Конец`"></time-picker>
+        <time-picker :label="`Начало`" v-model="timeRange.start" ref="timeStart"></time-picker>
+        <time-picker :label="`Конец`" v-model="timeRange.end" ref="timeEnd"></time-picker>
     </div>
 
     <div class="buttons">
-        <button class="clear">Очистить</button>
-        <button class="accept">Применить</button>
+        <button class="clear" @click="clear()">Очистить</button>
+        <button class="accept" @click="accept()">Применить</button>
     </div>
 </div>    
 </template>
 
 <script setup lang = "ts">
-import { ref } from "vue"
+import { ref, reactive, useTemplateRef } from "vue"
 import TimePicker from "@/components/TimePicker.vue"
 import DatePicker from "@/components/DatePicker.vue";
-import DayPicker from "@/components/DayPicker.vue";
+import DayButton from '@/components/DayButton.vue';
+
 
 const active = ref(3)
+const timeRange = reactive({ start: 0, end: 0 });
+const timeStart = useTemplateRef('timeStart')
+const timeEnd = useTemplateRef('timeEnd')
+
+const dateRange = reactive({ start: "", end: "" });
+const dateStartRef = useTemplateRef('dateStart')
+const dateEndRef = useTemplateRef('dateEnd')
+
+
+const days = ref([
+    { label: "Понедельник", toggled: false },
+    { label: "Вторник", toggled: false },
+    { label: "Среда", toggled: false },
+    { label: "Четверг", toggled: false },
+    { label: "Пятница", toggled: false },
+    { label: "Суббота", toggled: false },
+    { label: "Воскресенье", toggled: false },
+])
+
+
 
 function setActive(tab: number) {
     active.value = tab
+}
+
+function clear() {
+    timeStart.value?.clearTime()
+    timeEnd.value?.clearTime()
+    timeRange.start=0
+    timeRange.end=0
+    days.value.forEach((day)=>day.toggled=false)
+    dateRange.start = ""
+    dateRange.end = ""
+
+    dateStartRef.value?.clearDate()
+    dateEndRef.value?.clearDate()
+}
+
+function toggleDay(index: number) {
+    days.value[index].toggled =  !days.value[index].toggled
+}
+
+function accept() {
+    alert(`
+        {
+            "start_date": "${dateRange.start}",
+            "end_date": "${dateRange.end}",
+            "is_monday": ${days.value[0].toggled},
+            "is_tuesday": ${days.value[1].toggled},
+            "is_wednesday": ${days.value[2].toggled},
+            "is_thursday": ${days.value[3].toggled},
+            "is_friday": ${days.value[4].toggled},
+            "is_saturday": ${days.value[5].toggled},
+            "is_sunday": ${days.value[6].toggled},
+            "start_time": "${timeRange.start}",
+            "end_time": "${timeRange.end}"
+        }
+    `)
 }
 </script>
 
@@ -78,6 +142,7 @@ p {
     border: 1px solid var(--md-sys-color-outline-variant);
     border-radius: 12px;
     width: 400px;
+    margin: 20px;
 }
 
 button {
@@ -145,5 +210,11 @@ button {
     width: 303.12px;
     gap: 20px;
     margin: 0 43px;
+}
+
+.days {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 </style>

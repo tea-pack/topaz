@@ -1,17 +1,8 @@
 <template>
-    <div class="days">
-        <day-button
-            v-for="(day, index) in days"
-            :label="day.label"
-            :toggled="day.toggled"
-            :key="day.label"
-            @click="toggleDay(index)"
-        ></day-button>
-    </div>
+
 </template>
 
 <script setup lang="ts">
-import DayButton from '@/components/DayButton.vue';
 import {ref} from "vue"
 
 const days = ref([
