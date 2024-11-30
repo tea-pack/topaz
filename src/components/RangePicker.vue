@@ -44,8 +44,10 @@
 
     <div class="buttons">
         <button class="clear" @click="clear()">Очистить</button>
-        <button class="accept" @click="accept()">Применить</button>
+        <button class="accept" >Применить</button>
     </div>
+
+    <button class="save" @click="save()">Сохранить фильтр</button>
 </div>    
 </template>
 
@@ -99,8 +101,8 @@ function toggleDay(index: number) {
     days.value[index].toggled =  !days.value[index].toggled
 }
 
-function accept() {
-    alert(`
+function save() {
+    let data = `
         {
             "start_date": "${dateRange.start}",
             "end_date": "${dateRange.end}",
@@ -114,7 +116,9 @@ function accept() {
             "start_time": "${timeRange.start}",
             "end_time": "${timeRange.end}"
         }
-    `)
+    `
+
+    document.cookie = `${encodeURIComponent(Date.now())}=${encodeURIComponent(data)}; path=/`;
 }
 </script>
 
@@ -179,7 +183,7 @@ button {
     justify-content: right;
     gap: 8px;
     text-align: right;
-    margin: 16px 16px 33px 16px;
+    margin: 16px;
 }
 
 .buttons button {
@@ -216,5 +220,12 @@ button {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+}
+
+.save {
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    margin: 0 103px;
+    border-radius: 8px;
 }
 </style>
