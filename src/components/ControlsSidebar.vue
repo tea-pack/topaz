@@ -8,7 +8,7 @@
         </span>
         <span class="label">Фильтры</span>
     </div>
-    <div class="sorts">
+    <div class="sorts" @click="showingSort=true">
         <span class="icon">
         <span class="material-symbols-outlined">
             sort
@@ -29,14 +29,46 @@
     </div>
         <range-picker></range-picker>
     </div>
+
+    <div 
+        class="sort" 
+        :class="{'showing-sort': showingSort}"
+    >
+    <div class="sort-header">
+        <div class="sort-label">Сортировки</div>
+        <span class="material-symbols-outlined" @click="showingSort=false">
+        close
+        </span>
+    </div>
+        <sort-picker v-for="sort in sorts" :title="sort.title" v-model:modelValue="sort.enabled" v-model:sortValue="sort.sort"></sort-picker>
+    </div>
 </template>
 
 <script setup lang="ts">
 import RangePicker from "@/components/RangePicker.vue";
-import { ref } from "vue"
+import SortPicker from "@/components/SortPicker.vue";
+import { watch } from "vue";
+import { reactive, ref } from "vue"
 
 const showingFilter = ref(false);
-// const showingSort = ref(false);
+const showingSort = ref(false);
+
+
+const sorts = reactive([
+      {title: "Канал", enabled: true, sort: 0},
+      {title: "Программа", enabled: true, sort: 0},
+      {title: "Уникальных клиентов", enabled: true, sort: 1},
+      {title: "Среднее время просмотра", enabled: true, sort: 0},
+])
+
+const emit = defineEmits<{
+  (event: "update-sort", sort: {title: string, enabled: boolean, sort: number}[]): void
+}>()
+
+
+watch(sorts, ()=>{
+  emit("update-sort", sorts)
+})
 </script>
 
 <style scoped>
@@ -90,7 +122,7 @@ const showingFilter = ref(false);
   text-align: center;
 }
 
-.filter {
+.filter, .sort {
   position: absolute;
   top: 0;
   right: -100%;
@@ -101,12 +133,12 @@ const showingFilter = ref(false);
   background: var(--md-sys-color-surface);
 }
 
-.filter-header {
+.filter-header, .sort-header {
   display: flex;
   padding: 12px 12px 16px 24px;
 }
 
-.filter-label {
+.filter-label, .sort-label {
   font-family: "Roboto", sans-serif;
   flex: 1;
   padding-top: 12px;
@@ -117,7 +149,12 @@ const showingFilter = ref(false);
   padding: 8px;
 }
 
-.showing-filter {
+.sort-header span {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.showing-filter, .showing-sort {
   right: 0px;
 }
 

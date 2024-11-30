@@ -1,10 +1,10 @@
 <template>
     <div class="stats">
         <div class="data">
-            <data-table :data="mockData"></data-table>
+            <data-table :data="mockData" :sort="sortParams"></data-table>
             <sorted-bar-chart :data="mockData"></sorted-bar-chart>
         </div>
-        <controls-sidebar></controls-sidebar>
+        <controls-sidebar @update-sort="sort"></controls-sidebar>
     </div>
 </template>
 
@@ -12,6 +12,22 @@
 import ControlsSidebar from '@/components/ControlsSidebar.vue';
 import DataTable, { ProgramRecord } from '@/components/DataTable.vue';
 import SortedBarChart from "@/components/SortedBarChart.vue";
+import { ref, computed } from "vue"
+
+const sortParams = ref(
+    [
+        {title: "Канал", enabled: true, sort: 0},
+        {title: "Программа", enabled: true, sort: 0},
+        {title: "Уникальных клиентов", enabled: true, sort: 1},
+        {title: "Среднее время просмотра", enabled: true, sort: 0},
+    ]
+)
+
+function sort(sort: {title: string, enabled: boolean, sort: number}[]) {
+    sortParams.value = sort
+    // console.log(sortParams.value)
+    // console.log("ABOBA")
+}
 
 const mockData: ProgramRecord[] = [
   { channel: "Первый канал", program: "Программа 1", uniqueClients: 120, watchTime: 423 },
@@ -58,6 +74,8 @@ const mockData: ProgramRecord[] = [
 //     .catch((error) => {
 //         console.error("Failed to fetch items:", error);
 //     });
+
+
 
 </script>
 

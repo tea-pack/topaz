@@ -18,18 +18,18 @@
         <table>
             <thead>
                 <tr>
-                    <th>Канал</th>
-                    <th>Программа</th>
-                    <th>Уникальных клиентов</th>
-                    <th>Среднее время просмотра</th>
+                    <th v-if="sort[0].enabled">Канал</th>
+                    <th v-if="sort[1].enabled">Программа</th>
+                    <th v-if="sort[2].enabled">Уникальных клиентов</th>
+                    <th v-if="sort[3].enabled">Среднее время просмотра</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="row in props.data.slice(from, to)">
-                    <td>{{ row.channel }}</td>
-                    <td>{{ row.program }}</td>
-                    <td>{{ row.uniqueClients }}</td>
-                    <td>{{ row.watchTime }}</td>
+                <tr v-for="row in sortedValues.slice(from, to)" :key="row.channel">
+                    <td v-if="sort[0].enabled">{{ row.channel }}</td>
+                    <td v-if="sort[1].enabled">{{ row.program }}</td>
+                    <td v-if="sort[2].enabled">{{ row.uniqueClients }}</td>
+                    <td v-if="sort[3].enabled">{{ row.watchTime }}</td>
                 </tr>
             </tbody>
         </table>
@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang = "ts">
-import { ref, useTemplateRef } from 'vue'
+import { ref, useTemplateRef, watch, computed } from 'vue'
 
 export interface ProgramRecord {
     channel: string;
@@ -66,8 +66,10 @@ function find() {
 }
 
 const props = defineProps<{
-    data: ProgramRecord[]
+    data: ProgramRecord[],
+    sort: {title: string, enabled: boolean, sort: number}[]
 }>()
+
 
 const from = ref(0)
 const to = ref(5)
@@ -85,6 +87,14 @@ function last() {
         to.value = Math.min(from.value + 5, props.data.length)
     } 
 }
+
+const sortedValues = computed(() => {
+    console.log("rearranging")
+    // console.log(sortParams.value[2].sort)
+    // console.log(mockData.sort((a, b)=>sortParams.value[2].sort * (a.uniqueClients - b.uniqueClients)))
+    console.log([...props.data].sort((a, b)=>{return (props.sort[2].sort * (a.uniqueClients - b.uniqueClients))}))
+    return [...props.data].sort((a, b)=>{return (props.sort[2].sort * (a.uniqueClients - b.uniqueClients))})
+})
 </script>
 
 <style scoped>
