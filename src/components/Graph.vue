@@ -3,7 +3,7 @@
 </template>
 
 <script lang = "ts" setup>
-import { Edge, Node, NodeOptions, Options, Network} from "vis-network"
+import { Edge, Node, Options, Network} from "vis-network"
 import { onMounted, useTemplateRef } from "vue"
 
 const container = useTemplateRef("graph");
