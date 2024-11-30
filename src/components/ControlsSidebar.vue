@@ -36,7 +36,7 @@ import RangePicker from "@/components/RangePicker.vue";
 import { ref } from "vue"
 
 const showingFilter = ref(false);
-const showingSort = ref(false);
+// const showingSort = ref(false);
 </script>
 
 <style scoped>
