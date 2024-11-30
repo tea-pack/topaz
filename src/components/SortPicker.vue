@@ -1,7 +1,7 @@
 <template>
     <div class="sort-picker">
       <div class="header">
-        <span>{{ title }}</span>
+        <span class="label">{{ title }}</span>
         <label class="toggle-switch">
           <input type="checkbox" v-model="enabled" />
           <span class="slider"></span>
@@ -9,15 +9,18 @@
       </div>
       <div class="sort-options" :class="{ disabled: !enabled }">
         <button
-          class="sort-btn"
+          class="sort-btn btn-1"
           :class="{ active: sort === 1 }"
           @click="updateSort(1)"
           :disabled="!enabled"
         >
-          ↑ По возрастанию
+        <span class="material-symbols-outlined" v-if="sort === 1">
+            arrow_upward
+        </span>
+            По возрастанию
         </button>
         <button
-          class="sort-btn"
+          class="sort-btn btn-2"
           :class="{ active: sort === 0 }"
           @click="updateSort(0)"
           :disabled="!enabled"
@@ -25,12 +28,15 @@
           Не сортировать
         </button>
         <button
-          class="sort-btn"
+          class="sort-btn btn-3"
           :class="{ active: sort === -1 }"
           @click="updateSort(-1)"
           :disabled="!enabled"
         >
-          ↓ По убыванию
+            <span class="material-symbols-outlined" v-if="sort === -1">
+                arrow_downward
+            </span>
+            По убыванию
         </button>
       </div>
     </div>
@@ -80,37 +86,38 @@
   };
   </script>
   
-  <style scoped>
-  .sort-picker {
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    background-color: #fdf7f4;
-    font-family: Arial, sans-serif;
-  }
-  
-  .header {
+<style scoped>
+.sort-picker {
+    margin: 10px 20px;
+    font-family: "Roboto", sans-serif;
+}
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
-  }
-  
-  .toggle-switch {
+}
+
+.header .label {
+    padding: 16px;
+}
+
+.toggle-switch {
     position: relative;
     display: inline-block;
     width: 34px;
     height: 20px;
-  }
-  
-  .toggle-switch input {
+    margin: 20px;
+}
+
+.toggle-switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  .slider {
+}
+
+.slider {
     position: absolute;
     top: 0;
     left: 0;
@@ -119,9 +126,9 @@
     background-color: #ccc;
     border-radius: 34px;
     cursor: pointer;
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 14px;
@@ -131,41 +138,69 @@
     background-color: white;
     border-radius: 50%;
     transition: 0.4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #4caf50;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:checked + .slider {
+    background-color: var(--md-sys-color-primary);
+}
+
+input:checked + .slider:before {
     transform: translateX(14px);
-  }
-  
-  .sort-options {
+}
+
+.sort-options {
     display: flex;
-    gap: 0.5rem;
-  }
-  
-  .sort-options.disabled {
+}
+
+.sort-options.disabled {
     opacity: 0.5;
     pointer-events: none;
-  }
-  
-  .sort-btn {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    border-radius: 4px;
+}
+
+.sort-btn {
+    border: 1px solid var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
     cursor: pointer;
-    font-size: 0.9rem;
-  }
-  
-  .sort-btn.active {
-    background-color: #f5c6a5;
-    color: #fff;
-  }
-  
-  .sort-btn:disabled {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-1 {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    padding: 10px 0;
+    width: 160px;
+}
+
+.btn-2 {
+    padding: 10px 27px;
+    border-left: none;
+    border-right: none;
+    width: 160px;
+}
+
+.btn-3 {
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    padding: 10px 0x;
+    width: 160px;
+}
+
+.sort-btn.active {
+    background-color: var(--md-sys-color-secondary-container);
+}
+
+.sort-btn:disabled {
     cursor: not-allowed;
-  }
-  </style>
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 12 !important;
+  font-size: 16px;
+  margin-right: 11px;
+}
+</style>
